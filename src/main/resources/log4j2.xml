@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            
+            %d{yyyy-MM-dd'T'HH:mm:ss} %p %m%n
+        </Property>
+    </Properties>
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+         <RollingFile name="FileAppender" fileName="logs/classes.log" 
+             filePattern="logs/classes-%d{yyyy-MM-dd}-%i.log">
+    <PatternLayout>
+        <Pattern>${LOG_PATTERN}</Pattern>
+    </PatternLayout>
+    <Policies>
+    <!-- New File will be created after 10MB-->
+       <!-- <SizeBasedTriggeringPolicy size="10MB" /> --> 
+    <!-- New log file will be generated every day because filePattern have dd as a most specific 
+    time unit dd-->
+       <TimeBasedTriggeringPolicy interval="1" />
+    </Policies>
+    <!-- Maximum number of logs file will be maintained-->
+    <DefaultRolloverStrategy max="10"/>
+</RollingFile>
+    </Appenders>
+    <Loggers>
+    <!-- Async logger for performance improvement -->
+        <AsyncLogger name="com.codefactory.classmanagement" level="debug" additivity="false">
+            <AppenderRef ref="ConsoleAppender" /> 
+            <!-- <AppenderRef ref="FileAppender"/> -->
+        </AsyncLogger>
+
+        <Root level="info">
+               <AppenderRef ref="ConsoleAppender" /> 
+               <!-- <AppenderRef ref="FileAppender"/> -->
+        </Root>
+    </Loggers>
+</Configuration>
