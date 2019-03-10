@@ -1,17 +1,25 @@
 package com.codefactory.classmanagement.student.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.codefactory.classmanagement.util.model.AuditModel;
 
 
 @Entity
 @Table(name = "student_m")
-public class Student implements Serializable{
+public class Student extends AuditModel implements Serializable {
 
     
     @Id
@@ -22,6 +30,7 @@ public class Student implements Serializable{
             initialValue = 1000,
             allocationSize = 1
     )
+    @Column(name = "studentid")
     private Long id;
 
     @Column(name = "name")
@@ -30,21 +39,34 @@ public class Student implements Serializable{
     @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "mothername")
-    private String motherName;
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    private Set<Contact> contacts;
+
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER )
+    private Set<Address> address;
 
 
-    public String getFatherName() {
-        return this.fatherName;
-    }
+    // public void addAddress(Address add) {
 
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
-    }
+    //     if(address == null) {
+    //         address = new HashSet<>();
+    //     }
+    //     add.setStudent(this);
 
-    @Column(name = "fathername")
-    private String fatherName;
+    //     address.add(add);
+    // }
 
+    // public void addContact(Contact contact) {
+
+    //     if(contacts == null) {
+    //         contacts = new HashSet<>();
+    //     }
+
+    //     contact.setStudent(this);
+
+    //     contacts.add(contact);
+    // }
+    
 
 
     public Long getId() {
@@ -63,6 +85,7 @@ public class Student implements Serializable{
         this.studentName = studentName;
     }
 
+
     public String getLastName() {
         return this.lastName;
     }
@@ -73,16 +96,25 @@ public class Student implements Serializable{
 
 
 
+    public Set<Contact> getContacts() {
+        return this.contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public Set<Address> getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(Set<Address> address) {
+        this.address = address;
+    }
    
 
 
-    public String getMotherName() {
-        return this.motherName;
-    }
 
-    public void setMotherName(String motherName) {
-        this.motherName = motherName;
-    }
 
     @Override
     public String toString() {
@@ -90,9 +122,12 @@ public class Student implements Serializable{
             " id='" + getId() + "'" +
             ", studentName='" + getStudentName() + "'" +
             ", lastName='" + getLastName() + "'" +
-            ", motherName='" + getMotherName() + "'" +
+            ", contacts='" + getContacts() + "'" +
+            ", address='" + getAddress() + "'" +
             "}";
     }
+
+   
 
 
 

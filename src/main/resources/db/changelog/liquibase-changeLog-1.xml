@@ -1,16 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="rajan (generated)" id="1552135004331-1">
+    <changeSet author="rajan (generated)" id="1552156409127-1">
+        <createSequence sequenceName="address_sequence"/>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552156409127-2">
+        <createSequence sequenceName="contact_sequence"/>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552156409127-3">
         <createSequence sequenceName="student_sequence"/>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552135004331-2">
+    <changeSet author="rajan (generated)" id="1552156409127-4">
+        <createTable tableName="student_address">
+            <column autoIncrement="true" name="addressid" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="student_addressPK"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="iscorrespondence" type="SMALLINT"/>
+            <column name="studentid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552156409127-5">
+        <createTable tableName="student_contact">
+            <column autoIncrement="true" name="contactid" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="student_contactPK"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contactnumber" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="iscorrespondence" type="SMALLINT"/>
+            <column name="studentid" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552156409127-6">
         <createTable tableName="student_m">
-            <column autoIncrement="true" name="id" type="BIGINT">
+            <column autoIncrement="true" name="studentid" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="student_mPK"/>
             </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
             <column name="lastname" type="VARCHAR(255)"/>
-            <column name="mothername" type="VARCHAR(255)"/>
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552156409127-7">
+        <addForeignKeyConstraint baseColumnNames="studentid" baseTableName="student_contact" constraintName="FK_94wx26aek1ypyvkrsdhadpmam" deferrable="false" initiallyDeferred="false" referencedColumnNames="studentid" referencedTableName="student_m"/>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552156409127-8">
+        <addForeignKeyConstraint baseColumnNames="studentid" baseTableName="student_address" constraintName="FK_tnesm4jmllixa5uo0x5qwo6kb" deferrable="false" initiallyDeferred="false" referencedColumnNames="studentid" referencedTableName="student_m"/>
     </changeSet>
 </databaseChangeLog>
