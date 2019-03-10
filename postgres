@@ -1,0 +1,13 @@
+sudo -u postgres createuser --interactive
+man createuser
+sudo -u postgres createdb classes
+sudo adduser classes
+
+/etc/postgresql/9.5/main/pg_hba.conf
+
+sudo nano /etc/postgresql/9.5/main/pg_hba.conf
+ update the authentication method to trust
+
+local	all	all	trust
+host	all	127.0.0.1/32	trust
+
