@@ -35,6 +35,10 @@ public final class FeesPredicates{
         if(searchCriteria.getReceivedAmt() != null) {
             builder.and(QFees.fees.receivedAmt.eq(searchCriteria.getReceivedAmt()));
         }
+        
+        if(searchCriteria.getReceivedBy() != null) {
+        	builder.and(QFees.fees.createdBy.containsIgnoreCase(searchCriteria.getReceivedBy()));
+        }
 
         return builder.getValue();
     }

@@ -10,13 +10,16 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.codefactory.classmanagement.util.JSONUtil.DateUtilDesirializer;
+import com.codefactory.classmanagement.util.JSONUtil.DateUtilSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @MappedSuperclass
 @JsonIgnoreProperties(
       value = {"createdAt", "updatedAt","createdBy","updatedBy"},
-      allowGetters = false,
-      allowSetters = true
+      allowGetters = true
 )
 
 public abstract class AuditModel implements Serializable{
@@ -24,11 +27,13 @@ public abstract class AuditModel implements Serializable{
    
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
+    @JsonSerialize(using = DateUtilSerializer.class)
     private Date createdAt;
 
     
     @Column(name = "updated_at", nullable = false)
     @UpdateTimestamp
+    @JsonSerialize(using = DateUtilSerializer.class)
     private Date updatedAt;
 
     @Column(name = "created_by", nullable = false)

@@ -23,8 +23,6 @@ import com.codefactory.classmanagement.Fees.service.FeesService;
 @RestController("FeesController")
 public class FeesController{
 
-    @Autowired
-    private FeesRepo feesRepo;
 
     @Autowired
     private FeesService feesService;
@@ -34,9 +32,9 @@ public class FeesController{
 
     @RequestMapping(value = "/fee", method = RequestMethod.POST)
     public ResponseEntity<Fees> saveFees(@RequestBody Fees fees){
-        fees.setCreatedBy("Rajan");
-        fees.setUpdatedBy("Rajan");
-        fees = feesRepo.save(fees);
+    	
+    	logger.debug("The Received Request is:"+fees.toString());
+    	fees = feesService.saveFees(fees);
         return new ResponseEntity<>(fees,HttpStatus.OK);
     }
 
@@ -50,7 +48,8 @@ public class FeesController{
         @RequestParam(name = "feeReceiptDate",required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date feeReceiptDate,
         @RequestParam(name = "standard",required = false) Integer standard,
         @RequestParam(name = "page", defaultValue = "0") int page,
-        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize){
+        @RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
+        @RequestParam(name = "receivedBy", required = false)String receivedBy){
 
         logger.debug("Searching Fees on the search criteria");
 
@@ -80,6 +79,10 @@ public class FeesController{
         if(standard != null) {
             searchCriteria.setStandard(standard);
         }
+        
+        if(receivedBy != null) {
+        	searchCriteria.setReceivedBy(receivedBy);
+        }
 
         searchCriteria.setPage(page);
         searchCriteria.setPageSize(pageSize);
@@ -93,11 +96,11 @@ public class FeesController{
     }
 
 
-    @RequestMapping(value = "/totalfee", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/totalfee", method = RequestMethod.GET)
     public ResponseEntity<BigDecimal> getTotalFees() {
         
         return new ResponseEntity<>(feesRepo.getTotalFeesCollected(), HttpStatus.OK);
-    }
+    }*/
 
 
     

@@ -10,5 +10,7 @@ import com.codefactory.classmanagement.Fees.model.Fees;
 public interface FeesService{
 
 	Page<Fees> searchFees(FeeSearchCriteria searchCriteria);
+
+	Fees saveFees(Fees fees);
     
 }

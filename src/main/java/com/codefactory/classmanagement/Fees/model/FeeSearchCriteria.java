@@ -21,10 +21,25 @@ public class FeeSearchCriteria extends PageSize{
     private Date feeReceiptDate;
 
     private int standard;
+    
+    private String receivedBy;
+    
 
+    /**
+	 * @return the receivedBy
+	 */
+	public String getReceivedBy() {
+		return receivedBy;
+	}
 
+	/**
+	 * @param receivedBy the receivedBy to set
+	 */
+	public void setReceivedBy(String receivedBy) {
+		this.receivedBy = receivedBy;
+	}
 
-    public Long getFeeReceiptId() {
+	public Long getFeeReceiptId() {
         return this.feeReceiptId;
     }
 

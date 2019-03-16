@@ -4,6 +4,7 @@ import static com.codefactory.classmanagement.Fees.model.FeesPredicates.searchFe
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +24,10 @@ public class FeesServiceImpl implements FeesService {
     @Autowired
     private FeesRepo feesRepo;
 
+    @Autowired
+    private Logger logger;
+    
+    
     @Override
     public Page<Fees> searchFees(FeeSearchCriteria searchCriteria) {
 
@@ -32,5 +37,15 @@ public class FeesServiceImpl implements FeesService {
         ,searchCriteria.getPageSize(), Sort.by(Sort.Direction.DESC, "dtFeeReceipt")));
         return feesList;
     }
+
+	@Override
+	@Transactional(rollbackOn = {Exception.class})
+	public Fees saveFees(Fees fees) {
+		
+		fees.setCreatedBy("Manish");
+		fees.setUpdatedBy("Manish");
+		fees = feesRepo.save(fees);
+		return fees;
+	}
 
 }
