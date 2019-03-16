@@ -32,12 +32,13 @@ public class Address extends AuditModel{
     @Column(name = "address", nullable = false)
     private String addressLine;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "studentid")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "studentid", nullable = false)
     @JsonIgnore
     private Student student;
 
 
+    public Address() {}
 
     @Column(name = "iscorrespondence")
     private Short nIsPrimary;

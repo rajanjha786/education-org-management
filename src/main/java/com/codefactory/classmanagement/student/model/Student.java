@@ -1,7 +1,6 @@
 package com.codefactory.classmanagement.student.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,10 +38,12 @@ public class Student extends AuditModel implements Serializable {
     @Column(name = "lastname")
     private String lastName;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER, 
+    orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Contact> contacts;
 
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER )
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER ,
+    orphanRemoval = true, cascade = CascadeType.ALL)
     private Set<Address> address;
 
 

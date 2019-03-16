@@ -17,6 +17,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "student_contact")
 public class Contact extends AuditModel{
 
+
+    public Contact(){}
+
     @Id
     @GeneratedValue(generator = "contact_seq_generator")
     @SequenceGenerator(
@@ -31,8 +34,8 @@ public class Contact extends AuditModel{
     @Column(name = "contactnumber",nullable = false)
     private String contactNo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "studentid")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "studentid", nullable = false)
     @JsonIgnore
     private Student student;
 

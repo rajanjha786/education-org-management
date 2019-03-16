@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="rajan (generated)" id="1552360675522-1">
+        <dropSequence sequenceName="fee_receipt_fee_receipt_id_seq"/>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552360675522-2">
+        <dropSequence sequenceName="student_address_addressid_seq"/>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552360675522-3">
+        <dropSequence sequenceName="student_contact_contactid_seq"/>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552360675522-4">
+        <dropSequence sequenceName="student_m_studentid_seq"/>
+    </changeSet>
+</databaseChangeLog>

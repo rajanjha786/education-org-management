@@ -1,15 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet author="rajan (generated)" id="1552156409127-1">
+    <changeSet author="rajan (generated)" id="1552235047843-1">
         <createSequence sequenceName="address_sequence"/>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552156409127-2">
+    <changeSet author="rajan (generated)" id="1552235047843-2">
         <createSequence sequenceName="contact_sequence"/>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552156409127-3">
+    <changeSet author="rajan (generated)" id="1552235047843-3">
+        <createSequence sequenceName="fee_receipt_sequence"/>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552235047843-4">
         <createSequence sequenceName="student_sequence"/>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552156409127-4">
+    <changeSet author="rajan (generated)" id="1552235047843-5">
+        <createTable tableName="fee_receipt">
+            <column autoIncrement="true" name="fee_receipt_id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="fee_receiptPK"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="course" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="down_payment" type="NUMBER(19, 2)"/>
+            <column name="fee_receipt_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number_installment" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="payment_mode" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="received_amount" type="NUMBER(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="standard" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="student_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_amt_payed" type="NUMBER(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_remaining_amt" type="NUMBER(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_fees" type="NUMBER(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="total_no_installments" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="rajan (generated)" id="1552235047843-6">
         <createTable tableName="student_address">
             <column autoIncrement="true" name="addressid" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="student_addressPK"/>
@@ -17,7 +73,13 @@
             <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="address" type="VARCHAR(255)">
@@ -29,7 +91,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552156409127-5">
+    <changeSet author="rajan (generated)" id="1552235047843-7">
         <createTable tableName="student_contact">
             <column autoIncrement="true" name="contactid" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="student_contactPK"/>
@@ -37,7 +99,13 @@
             <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="contactnumber" type="VARCHAR(255)">
@@ -49,7 +117,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552156409127-6">
+    <changeSet author="rajan (generated)" id="1552235047843-8">
         <createTable tableName="student_m">
             <column autoIncrement="true" name="studentid" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="student_mPK"/>
@@ -57,17 +125,23 @@
             <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="lastname" type="VARCHAR(255)"/>
             <column name="name" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552156409127-7">
+    <changeSet author="rajan (generated)" id="1552235047843-9">
         <addForeignKeyConstraint baseColumnNames="studentid" baseTableName="student_contact" constraintName="FK_94wx26aek1ypyvkrsdhadpmam" deferrable="false" initiallyDeferred="false" referencedColumnNames="studentid" referencedTableName="student_m"/>
     </changeSet>
-    <changeSet author="rajan (generated)" id="1552156409127-8">
+    <changeSet author="rajan (generated)" id="1552235047843-10">
         <addForeignKeyConstraint baseColumnNames="studentid" baseTableName="student_address" constraintName="FK_tnesm4jmllixa5uo0x5qwo6kb" deferrable="false" initiallyDeferred="false" referencedColumnNames="studentid" referencedTableName="student_m"/>
     </changeSet>
 </databaseChangeLog>
