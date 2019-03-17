@@ -17,8 +17,11 @@ import com.codefactory.classmanagement.util.JSONUtil.DateUtilSerializer;
 import com.codefactory.classmanagement.util.model.AuditModel;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import lombok.Data;
 @Entity
 @Table(name = "fee_receipt")
+@Data
 public class Fees extends AuditModel{
 
     @Id
@@ -74,131 +77,5 @@ public class Fees extends AuditModel{
     private BigDecimal totalFees;
 
 
-    public int getStandard() {
-        return this.standard;
-    }
 
-    public void setStandard(int standard) {
-        this.standard = standard;
-    }
-
-    public BigDecimal getTotalFees() {
-        return this.totalFees;
-    }
-
-    public void setTotalFees(BigDecimal totalFees) {
-        this.totalFees = totalFees;
-    }
-
-
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStudentName() {
-        return this.studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-    public String getCourse() {
-        return this.course;
-    }
-
-    public void setCourse(String course) {
-        this.course = course;
-    }
-
-    public Short getPaymentType() {
-        return this.paymentType;
-    }
-
-    public void setPaymentType(Short paymentType) {
-        this.paymentType = paymentType;
-    }
-
-    public Short getTotalNoOfInstallments() {
-        return this.totalNoOfInstallments;
-    }
-
-    public void setTotalNoOfInstallments(Short totalNoOfInstallments) {
-        this.totalNoOfInstallments = totalNoOfInstallments;
-    }
-
-    public Short getNumberOfInstallments() {
-        return this.numberOfInstallments;
-    }
-
-    public void setNumberOfInstallments(Short numberOfInstallments) {
-        this.numberOfInstallments = numberOfInstallments;
-    }
-
-    public BigDecimal getDownPayment() {
-        return this.downPayment;
-    }
-
-    public void setDownPayment(BigDecimal downPayment) {
-        this.downPayment = downPayment;
-    }
-
-    public BigDecimal getReceivedAmt() {
-        return this.receivedAmt;
-    }
-
-    public void setReceivedAmt(BigDecimal receivedAmt) {
-        this.receivedAmt = receivedAmt;
-    }
-
-    public BigDecimal getTotAmtPayed() {
-        return this.totAmtPayed;
-    }
-
-    public void setTotAmtPayed(BigDecimal totAmtPayed) {
-        this.totAmtPayed = totAmtPayed;
-    }
-
-    public BigDecimal getTotRemainingAmt() {
-        return this.totRemainingAmt;
-    }
-
-    public void setTotRemainingAmt(BigDecimal totRemainingAmt) {
-        this.totRemainingAmt = totRemainingAmt;
-    }
-
-    public Date getDtFeeReceipt() {
-        return this.dtFeeReceipt;
-    }
-
-    public void setDtFeeReceipt(Date dtFeeReceipt) {
-        this.dtFeeReceipt = dtFeeReceipt;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", studentName='" + getStudentName() + "'" +
-            ", course='" + getCourse() + "'" +
-            ", paymentType='" + getPaymentType() + "'" +
-            ", totalNoOfInstallments='" + getTotalNoOfInstallments() + "'" +
-            ", numberOfInstallments='" + getNumberOfInstallments() + "'" +
-            ", downPayment='" + getDownPayment() + "'" +
-            ", receivedAmt='" + getReceivedAmt() + "'" +
-            ", totAmtPayed='" + getTotAmtPayed() + "'" +
-            ", totRemainingAmt='" + getTotRemainingAmt() + "'" +
-            ", dtFeeReceipt='" + getDtFeeReceipt() + "'" +
-            ", standard='" + getStandard() + "'" +
-            ", totalFees='" + getTotalFees() + "'" +
-            "}";
-    }
-   
 }

@@ -11,3 +11,7 @@ sudo nano /etc/postgresql/9.5/main/pg_hba.conf
 local	all	all	trust
 host	all	127.0.0.1/32	trust
 
+
+DROP SCHEMA public CASCADE; -- to drop a schema
+CREATE SCHEMA public; -- to create a schema
+

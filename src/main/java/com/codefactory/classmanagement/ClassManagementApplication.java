@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
 @SpringBootApplication
-public class ClassManagementApplication {
+public class ClassManagementApplication /*extends SpringBootServletInitializer*/{
 
 	public static void main(String[] args) {
 		SpringApplication.run(ClassManagementApplication.class, args);
