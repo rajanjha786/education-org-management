@@ -15,3 +15,5 @@ host	all	127.0.0.1/32	trust
 DROP SCHEMA public CASCADE; -- to drop a schema
 CREATE SCHEMA public; -- to create a schema
 
+
+mvn install -Dmaven.test.skip=true
