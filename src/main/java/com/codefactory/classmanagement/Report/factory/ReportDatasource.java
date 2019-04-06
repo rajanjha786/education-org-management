@@ -1,16 +1,39 @@
 package com.codefactory.classmanagement.Report.factory;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Vector;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Component;
+
 import com.codefactory.classmanagement.Fees.model.Fees;
 import com.codefactory.classmanagement.Report.model.ReportModel;
 
+@Component
 public class ReportDatasource {
 	
 	
-	public static  Collection generateCollection(Fees fees) {
+	private static ResourceLoader resourceLoader;
+	
+	
+
+
+
+	/**
+	 * @param resourceLoader the resourceLoader to set
+	 */
+	@Autowired
+	public  void setResourceLoader(ResourceLoader resourceLoader) {
+		ReportDatasource.resourceLoader = resourceLoader;
+	}
+
+
+
+
+	public static  Collection generateCollection(Fees fees) throws IOException {
 		
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -48,7 +71,8 @@ public class ReportDatasource {
 		model.setReceivedBy(fees.getCreatedBy());
 		model.setClassName("Catalyst Classes");
 		model.setId(fees.getId());
-		model.setLogo(ClassLoader.getSystemResource("amit.jpg").getPath());
+		String path = resourceLoader.getResource("classpath:amit.jpg").getURI().getPath();
+		model.setLogo(path);
 		
 		Collection collection = new Vector();
 		collection.add(model);
