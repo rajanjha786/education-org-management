@@ -11,6 +11,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.codefactory.classmanagement.util.JSONUtil.DateUtilDesirializer;
 import com.codefactory.classmanagement.util.JSONUtil.DateUtilSerializer;
@@ -36,6 +39,8 @@ public class Fees extends AuditModel{
     private Long id;
 
     @Column(name = "student_name", nullable = false)
+    @NotNull(message = "Student Name Should not be empty")
+    @Size(min  = 1, max = 255,message = "Student Name size should be greater then 0 and less then 255")
     private String studentName;
 
     @Column(name = "course", nullable = false)
@@ -76,6 +81,7 @@ public class Fees extends AuditModel{
     @Column(name = "total_fees", nullable = false)
     private BigDecimal totalFees;
 
-
+    @Column(name = "branch", nullable = false)
+    private String branch;
 
 }

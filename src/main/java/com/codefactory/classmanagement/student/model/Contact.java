@@ -13,8 +13,11 @@ import javax.persistence.Table;
 import com.codefactory.classmanagement.util.model.AuditModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity(name = "ForeignKeyAssoContactStu")
 @Table(name = "student_contact")
+@Data
 public class Contact extends AuditModel{
 
 
@@ -43,54 +46,7 @@ public class Contact extends AuditModel{
     private Short nIsPrimary;
 
 
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getContactNo() {
-        return this.contactNo;
-    }
-
-    public void setContactNo(String contactNo) {
-        this.contactNo = contactNo;
-    }
-
-    public Student getStudent() {
-        return this.student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
     
-
-
-    public Short getNIsPrimary() {
-        return this.nIsPrimary;
-    }
-
-    public void setNIsPrimary(Short nIsPrimary) {
-        this.nIsPrimary = nIsPrimary;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", contactNo='" + getContactNo() + "'" +
-            ", student='" + getStudent() + "'" +
-            ", nIsPrimary='" + getNIsPrimary() + "'" +
-            "}";
-    }
-
-
 
 
 }

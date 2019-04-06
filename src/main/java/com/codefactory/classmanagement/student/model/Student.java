@@ -15,9 +15,12 @@ import javax.persistence.Table;
 
 import com.codefactory.classmanagement.util.model.AuditModel;
 
+import lombok.Data;
+
 
 @Entity
 @Table(name = "student_m")
+@Data
 public class Student extends AuditModel implements Serializable {
 
     
@@ -47,92 +50,7 @@ public class Student extends AuditModel implements Serializable {
     private Set<Address> address;
 
 
-    // public void addAddress(Address add) {
-
-    //     if(address == null) {
-    //         address = new HashSet<>();
-    //     }
-    //     add.setStudent(this);
-
-    //     address.add(add);
-    // }
-
-    // public void addContact(Contact contact) {
-
-    //     if(contacts == null) {
-    //         contacts = new HashSet<>();
-    //     }
-
-    //     contact.setStudent(this);
-
-    //     contacts.add(contact);
-    // }
-    
-
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStudentName() {
-        return this.studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
-    }
-
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-
-
-    public Set<Contact> getContacts() {
-        return this.contacts;
-    }
-
-    public void setContacts(Set<Contact> contacts) {
-        this.contacts = contacts;
-    }
-
-    public Set<Address> getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(Set<Address> address) {
-        this.address = address;
-    }
    
-
-
-
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", studentName='" + getStudentName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", contacts='" + getContacts() + "'" +
-            ", address='" + getAddress() + "'" +
-            "}";
-    }
-
-   
-
-
-
-
     
 }
    

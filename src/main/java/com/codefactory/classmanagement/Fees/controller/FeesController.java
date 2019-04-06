@@ -1,7 +1,12 @@
 package com.codefactory.classmanagement.Fees.controller;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,16 +14,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codefactory.classmanagement.Fees.dao.FeesRepo;
 import com.codefactory.classmanagement.Fees.model.FeeSearchCriteria;
 import com.codefactory.classmanagement.Fees.model.Fees;
 import com.codefactory.classmanagement.Fees.service.FeesService;
+import com.codefactory.classmanagement.util.Exception.ValidationException;
+import com.codefactory.classmanagement.util.model.ErrorMessages;
+import com.codefactory.classmanagement.util.model.Message;
+
+import net.sf.jasperreports.engine.JRException;
 
 @RestController("FeesController")
 public class FeesController{
@@ -31,11 +42,29 @@ public class FeesController{
     private Logger logger;
 
     @RequestMapping(value = "/fee", method = RequestMethod.POST)
-    public ResponseEntity<Fees> saveFees(@RequestBody Fees fees){
+    public ResponseEntity<byte[]> saveFees(@Valid @RequestBody Fees fees, Errors errors) throws IOException, JRException{
+    	
+    	if(errors.hasErrors()) {
+    		List<FieldError> fieldErrors = errors.getFieldErrors();
+    		List<Message> errorMessages = new ArrayList<>();
+    		for(FieldError error : fieldErrors) {
+    			Message msg = new Message();
+    			msg.setMessage(error.getDefaultMessage());
+    			errorMessages.add(msg);
+    		}
+    		ErrorMessages errorMessage = new ErrorMessages();
+    		errorMessage.setMessage(errorMessages);
+    		
+    		throw new ValidationException(errorMessage);
+    	}
     	
     	logger.debug("The Received Request is:"+fees.toString());
-    	fees = feesService.saveFees(fees);
-        return new ResponseEntity<>(fees,HttpStatus.OK);
+    	byte[] bytes  = feesService.saveFees(fees);
+        return ResponseEntity
+        		.ok()
+        		.header("Content-Type", "appication/pdf; charset=UTF-8")
+        		.header("Content-Disposition", "inline;filename=\"" + fees.getId()+fees.getStudentName()+".pdf\"")
+        		.body(bytes);
     }
 
     @RequestMapping(value = "fee", method = RequestMethod.GET)

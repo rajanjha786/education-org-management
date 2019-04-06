@@ -18,8 +18,6 @@ import com.codefactory.classmanagement.student.service.StudentService;
 @Transactional
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
-    private StudentDao studentDao;
 
     @Autowired
     private StudentRepo studentRepo;

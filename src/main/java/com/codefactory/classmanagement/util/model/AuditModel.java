@@ -22,7 +22,8 @@ import lombok.Setter;
 @MappedSuperclass
 @JsonIgnoreProperties(
       value = {"createdAt", "updatedAt","createdBy","updatedBy"},
-      allowGetters = true
+      allowGetters = true,
+      allowSetters = true
 )
 @Data
 public abstract class AuditModel implements Serializable{
