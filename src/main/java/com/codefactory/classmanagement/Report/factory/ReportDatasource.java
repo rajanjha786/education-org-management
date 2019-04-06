@@ -18,9 +18,6 @@ public class ReportDatasource {
 	
 	private static ResourceLoader resourceLoader;
 	
-	
-
-
 
 	/**
 	 * @param resourceLoader the resourceLoader to set
