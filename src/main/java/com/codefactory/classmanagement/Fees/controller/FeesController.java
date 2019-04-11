@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -66,7 +67,23 @@ public class FeesController{
         		.header("Content-Disposition", "inline;filename=\"" + fees.getId()+fees.getStudentName()+".pdf\"")
         		.body(bytes);
     }
-
+    
+    @RequestMapping(value = "fee/{feeId}", method = RequestMethod.GET)
+    public ResponseEntity<byte[]> reprintFeeReceipt(@PathVariable long feeId) throws Exception {
+    	
+    	logger.debug("Fee Id: "+feeId);
+    	byte [] bytes = feesService.reprintFees(feeId);
+    	 return ResponseEntity
+         		.ok()
+         		.header("Content-Type", "appication/pdf; charset=UTF-8")
+         		.header("Content-Disposition", "inline;filename=\"" + feeId +".pdf\"")
+         		.body(bytes);
+    	
+    	
+    }
+    
+    
+    
     @RequestMapping(value = "fee", method = RequestMethod.GET)
     public ResponseEntity<Page<Fees>> getFees(
         @RequestParam(name = "feeReceiptId", required = false)Long feeReceiptId,

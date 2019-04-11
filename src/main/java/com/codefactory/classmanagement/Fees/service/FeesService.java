@@ -16,5 +16,7 @@ public interface FeesService{
 	Page<Fees> searchFees(FeeSearchCriteria searchCriteria);
 
 	byte[] saveFees(Fees fees) throws IOException, JRException;
+
+	byte[] reprintFees(long feeId) throws Exception;
     
 }

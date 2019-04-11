@@ -73,4 +73,19 @@ public class FeesServiceImpl implements FeesService {
 		return bytes;
 	}
 
+	@Override
+	public byte[] reprintFees(long feeId) throws Exception {
+		
+		byte[] bytes = null;
+		FeeSearchCriteria criteria = new FeeSearchCriteria();
+		criteria.setFeeReceiptId(feeId);
+		Predicate predicate = searchFeesPredicate(criteria);
+		Fees fee = feesRepo.findOne(predicate).orElseThrow(() -> new Exception("No such Fee Receipt.."));
+		HashMap parameter = new HashMap();
+		JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(ReportDatasource.generateCollection(fee));
+		JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameter,beanColDataSource);
+		bytes = JasperExportManager.exportReportToPdf(jasperPrint);
+		return bytes;
+	}
+
 }
